@@ -10,7 +10,7 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->role === 'admin') {
+        if (Auth::guard('api')->check() && Auth::guard('api')->user()->role === 'admin') {
             return $next($request);
         }
 
@@ -20,3 +20,4 @@ class AdminMiddleware
         ], 403);
     }
 }
+

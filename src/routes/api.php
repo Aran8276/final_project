@@ -18,7 +18,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/register', [AdminAuthController::class, 'register']);
-Route::post('/login', [AdminAuthController::class, 'login']);
+Route::post('/login', [AdminAuthController::class, 'login'])->name('login');
 Route::post('/reset-password', [AdminAuthController::class, 'resetPassword']);
 
 Route::middleware(['auth:api'])->group(function () {
@@ -28,8 +28,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('/alat', AlatController::class);
     Route::apiResource('/data/pelanggan', PelangganDataController::class);
     Route::apiResource('/detail/penyewaan', PenyewaanDetailController::class);
-
-    Route::post('/auth/logout', [AdminAuthController::class, 'logout']);
-    Route::get('/auth/me', [AdminAuthController::class, 'me']);
+    
+    Route::get('/me', [AdminAuthController::class, 'me']);
+    Route::post('/logout', [AdminAuthController::class, 'logout']);
 });
 
